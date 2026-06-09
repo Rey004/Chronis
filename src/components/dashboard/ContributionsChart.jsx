@@ -1,4 +1,6 @@
 'use client';
+// Opt out of React Compiler optimization to prevent element type and key conflicts in Recharts
+"use no memo";
 import React, { useState, useEffect } from 'react';
 import { ResponsiveContainer, BarChart, Bar, XAxis, YAxis, Tooltip, Cell } from 'recharts';
 import { BookOpen, Mic, Calendar, Lightbulb } from 'lucide-react';
@@ -11,11 +13,27 @@ const SOURCE_CONFIG = {
   reflection: { color: '#10b981', name: 'Weekly Notes', icon: Lightbulb }
 };
 
+const CustomTooltip = ({ active, payload }) => {
+  if (active && payload && payload.length) {
+    const data = payload[0].payload;
+    return (
+      <div className="bg-[rgba(11,11,11,0.92)] border border-[rgba(255,255,255,0.08)] rounded-xl p-3 shadow-xl backdrop-blur-md">
+        <p className="text-xs font-semibold text-brand-text mb-1">{data.name}</p>
+        <p className="text-xs text-brand-muted">
+          <span className="font-semibold text-brand-violet">{data.count}</span> logs used to calculate scores
+        </p>
+      </div>
+    );
+  }
+  return null;
+};
+
 export default function ContributionsChart() {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    setMounted(true);
+    const timer = setTimeout(() => setMounted(true), 0);
+    return () => clearTimeout(timer);
   }, []);
 
   // Compute counts from mockEvidence
@@ -31,20 +49,7 @@ export default function ContributionsChart() {
     color: SOURCE_CONFIG[type].color
   }));
 
-  const CustomTooltip = ({ active, payload }) => {
-    if (active && payload && payload.length) {
-      const data = payload[0].payload;
-      return (
-        <div className="bg-[rgba(11,11,11,0.92)] border border-[rgba(255,255,255,0.08)] rounded-xl p-3 shadow-xl backdrop-blur-md">
-          <p className="text-xs font-semibold text-brand-text mb-1">{data.name}</p>
-          <p className="text-xs text-brand-muted">
-            <span className="font-semibold text-brand-violet">{data.count}</span> logs used to calculate scores
-          </p>
-        </div>
-      );
-    }
-    return null;
-  };
+
 
   if (!mounted) {
     return (

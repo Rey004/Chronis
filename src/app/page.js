@@ -2,9 +2,11 @@
 import React from 'react';
 import { mockMetrics } from '@/data/mockData';
 import MetricCard from '@/components/dashboard/MetricCard';
-import BehaviorChart from '@/components/dashboard/BehaviorChart';
-import ContributionsChart from '@/components/dashboard/ContributionsChart';
+import dynamic from 'next/dynamic';
 import RecentObservations from '@/components/dashboard/RecentObservations';
+
+const BehaviorChart = dynamic(() => import('@/components/dashboard/BehaviorChart'), { ssr: false });
+const ContributionsChart = dynamic(() => import('@/components/dashboard/ContributionsChart'), { ssr: false });
 import { Brain, Sparkles } from 'lucide-react';
 
 export default function Dashboard() {
@@ -41,9 +43,10 @@ export default function Dashboard() {
           </span>
         </div>
         
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+        {/* Horizontally scrollable row on mobile/tablet, grid on desktop */}
+        <div className="flex flex-row flex-nowrap overflow-x-auto gap-4 pb-4 pt-2 -mx-4 px-4 scrollbar-none snap-x lg:grid lg:grid-cols-5 lg:gap-4 lg:overflow-x-visible lg:mx-0 lg:px-0 lg:pb-0">
           {metrics.map((metric) => (
-            <div key={metric.id} className="h-full">
+            <div key={metric.id} className="w-[270px] sm:w-[300px] flex-shrink-0 snap-align-center lg:w-full lg:h-full">
               <MetricCard metric={metric} />
             </div>
           ))}

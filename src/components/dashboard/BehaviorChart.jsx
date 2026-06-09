@@ -1,4 +1,6 @@
 'use client';
+// Opt out of React Compiler optimization to prevent element type and key conflicts in Recharts
+"use no memo";
 import React, { useState, useEffect } from 'react';
 import { ResponsiveContainer, LineChart, Line, XAxis, YAxis, Tooltip, CartesianGrid } from 'recharts';
 import { Eye, EyeOff } from 'lucide-react';
@@ -11,7 +13,39 @@ const METRIC_STYLES = {
   'focus-depth': { color: '#ec4899', name: 'Focus Depth & Flow' }
 };
 
-export default function BehaviorChart({ metrics }) {
+// Custom Tooltip component defined OUTSIDE the parent render to prevent recreation flicker
+const CustomTooltip = ({ active, payload, label }) => {
+  if (active && payload && payload.length) {
+    return (
+      <div className="bg-[rgba(11,11,11,0.92)] border border-[rgba(255,255,255,0.08)] rounded-xl p-4 shadow-xl backdrop-blur-md">
+        <p className="text-xs font-mono text-brand-muted uppercase tracking-wider mb-2.5">{label}</p>
+        <div className="flex flex-col gap-2">
+          {payload.map((entry) => {
+            const metricKey = entry.dataKey || entry.name;
+            const style = METRIC_STYLES[metricKey] || { color: '#a78bfa', name: metricKey };
+            const displayName = style.name;
+            const strokeColor = entry.stroke || style.color;
+            return (
+              <div key={metricKey} className="flex items-center justify-between gap-6">
+                <div className="flex items-center gap-2">
+                  <div 
+                    className="w-1.5 h-1.5 rounded-full" 
+                    style={{ backgroundColor: strokeColor }} 
+                  />
+                  <span className="text-xs text-brand-muted-light">{displayName}</span>
+                </div>
+                <span className="text-xs font-semibold text-[#ece8e2]">{entry.value}%</span>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    );
+  }
+  return null;
+};
+
+export default function BehaviorChart({ metrics = [] }) {
   const [mounted, setMounted] = useState(false);
   const [activeMetrics, setActiveMetrics] = useState({
     'decision-confidence': true,
@@ -22,7 +56,8 @@ export default function BehaviorChart({ metrics }) {
   });
 
   useEffect(() => {
-    setMounted(true);
+    const timer = setTimeout(() => setMounted(true), 0);
+    return () => clearTimeout(timer);
   }, []);
 
   // Format timeseries data for Recharts (merge separate trends into weekly objects)
@@ -52,31 +87,6 @@ export default function BehaviorChart({ metrics }) {
     }));
   };
 
-  const CustomTooltip = ({ active, payload, label }) => {
-    if (active && payload && payload.length) {
-      return (
-        <div className="bg-[rgba(11,11,11,0.92)] border border-[rgba(255,255,255,0.08)] rounded-xl p-4 shadow-xl backdrop-blur-md">
-          <p className="text-xs font-mono text-brand-muted uppercase tracking-wider mb-2.5">{label}</p>
-          <div className="flex flex-col gap-2">
-            {payload.map((entry) => (
-              <div key={entry.name} className="flex items-center justify-between gap-6">
-                <div className="flex items-center gap-2">
-                  <div 
-                    className="w-1.5 h-1.5 rounded-full" 
-                    style={{ backgroundColor: entry.stroke }} 
-                  />
-                  <span className="text-xs text-brand-muted-light">{METRIC_STYLES[entry.name]?.name}</span>
-                </div>
-                <span className="text-xs font-semibold text-brand-text">{entry.value}%</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      );
-    }
-    return null;
-  };
-
   if (!mounted) {
     return (
       <div className="h-[360px] w-full flex items-center justify-center bg-brand-bg-card border border-brand-border rounded-2xl">
@@ -91,10 +101,10 @@ export default function BehaviorChart({ metrics }) {
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
         <div>
           <span className="text-[10px] font-mono tracking-[0.25em] text-[#a78bfa] uppercase">
-            Trajectory
+            Progress
           </span>
           <h3 className="font-serif text-xl font-light text-brand-text mt-0.5">
-            Behavioral Trends Over Time
+            Your Scores Over Time
           </h3>
         </div>
         
@@ -102,7 +112,9 @@ export default function BehaviorChart({ metrics }) {
         <div className="flex flex-wrap gap-2">
           {metrics.map((m) => {
             const isActive = activeMetrics[m.id];
-            const color = METRIC_STYLES[m.id]?.color;
+            const style = METRIC_STYLES[m.id] || { color: '#a78bfa', name: m.name || m.id };
+            const color = style.color;
+            const name = style.name;
             return (
               <button
                 key={m.id}
@@ -125,7 +137,7 @@ export default function BehaviorChart({ metrics }) {
                     boxShadow: isActive ? `0 0 8px ${color}` : 'none'
                   }}
                 />
-                <span className="font-medium">{METRIC_STYLES[m.id]?.name}</span>
+                <span className="font-medium">{name}</span>
                 {isActive ? <Eye size={11} className="ml-0.5 opacity-60" /> : <EyeOff size={11} className="ml-0.5 opacity-30" />}
               </button>
             );
@@ -152,22 +164,25 @@ export default function BehaviorChart({ metrics }) {
             />
             <Tooltip content={<CustomTooltip />} cursor={{ stroke: 'rgba(255, 255, 255, 0.05)', strokeWidth: 1 }} />
             
-            {metrics.map((m) => {
-              if (!activeMetrics[m.id]) return null;
-              return (
-                <Line
-                  key={m.id}
-                  type="monotone"
-                  dataKey={m.id}
-                  name={m.id}
-                  stroke={METRIC_STYLES[m.id]?.color}
-                  strokeWidth={2}
-                  dot={{ r: 1.5, strokeWidth: 0, fill: METRIC_STYLES[m.id]?.color }}
-                  activeDot={{ r: 4.5, strokeWidth: 0, fill: METRIC_STYLES[m.id]?.color }}
-                  animationDuration={800}
-                />
-              );
-            })}
+            {/* Explicitly pre-filter active lines to avoid Recharts null iteration errors */}
+            {metrics
+              .filter((m) => activeMetrics[m.id])
+              .map((m) => {
+                const style = METRIC_STYLES[m.id] || { color: '#a78bfa' };
+                return (
+                  <Line
+                    key={m.id}
+                    type="monotone"
+                    dataKey={m.id}
+                    name={m.id}
+                    stroke={style.color}
+                    strokeWidth={2}
+                    dot={{ r: 1.5, strokeWidth: 0, fill: style.color }}
+                    activeDot={{ r: 4.5, strokeWidth: 0, fill: style.color }}
+                    animationDuration={800}
+                  />
+                );
+              })}
           </LineChart>
         </ResponsiveContainer>
       </div>
