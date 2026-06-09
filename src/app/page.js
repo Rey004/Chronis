@@ -4,6 +4,7 @@ import { mockMetrics } from '@/data/mockData';
 import MetricCard from '@/components/dashboard/MetricCard';
 import dynamic from 'next/dynamic';
 import RecentObservations from '@/components/dashboard/RecentObservations';
+import ChronisDialogue from '@/components/dashboard/ChronisDialogue';
 
 const BehaviorChart = dynamic(() => import('@/components/dashboard/BehaviorChart'), { ssr: false });
 const ContributionsChart = dynamic(() => import('@/components/dashboard/ContributionsChart'), { ssr: false });
@@ -13,7 +14,7 @@ export default function Dashboard() {
   const metrics = mockMetrics;
 
   return (
-    <div className="flex flex-col gap-8 md:gap-12 animate-in fade-in slide-in-from-bottom-6 duration-700">
+    <div className="flex flex-col gap-8 md:gap-10 animate-in fade-in slide-in-from-bottom-6 duration-700">
       
       {/* Premium Welcome Header */}
       <section className="border-b border-[rgba(255,255,255,0.05)] pb-8 mb-2">
@@ -29,6 +30,11 @@ export default function Dashboard() {
             Chronis collects notes and meetings from your memory locket to show your daily habits and progress.
           </p>
         </div>
+      </section>
+
+      {/* Conversational AI Insights Dialogue */}
+      <section className="-mt-4 md:-mt-6 animate-in fade-in slide-in-from-top-4 duration-500">
+        <ChronisDialogue />
       </section>
 
       {/* Behavioral Trend Cards Grid */}

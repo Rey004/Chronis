@@ -360,6 +360,272 @@ export const mockTimelineChapters = [
   }
 ];
 
+export const mockWeeklyTimelineChapters = [
+  {
+    id: "w23-deep-work",
+    year: 2026,
+    month: "Week 23 (June 1 - June 7)",
+    title: "Deep Work Routine & Prototypes",
+    period: "Jun 1 - Jun 7, 2026",
+    summary: "Started having Focus Wednesdays. This gave you block times of 5 hours to write code without meetings, resulting in a prototype release.",
+    milestones: [
+      {
+        date: "2026-06-01",
+        title: "No-meeting Wednesdays",
+        description: "Blocked Wednesdays for coding and muted notifications."
+      },
+      {
+        date: "2026-06-05",
+        title: "Shipped New Prototype",
+        description: "Finished writing the core code for the new text parser."
+      }
+    ],
+    insights: ["focus-depth", "decision-confidence"],
+    evidence: ["journal-4", "voice-4", "calendar-4", "reflection-4"]
+  },
+  {
+    id: "w22-focus-kickoff",
+    year: 2026,
+    month: "Week 22 (May 25 - May 31)",
+    title: "Focus Wednesdays Kickoff",
+    period: "May 25 - May 31, 2026",
+    summary: "Muted Slack notifications, achieved 5 hours of clean coding time.",
+    milestones: [
+      {
+        date: "2026-05-25",
+        title: "Slack Mutex",
+        description: "Decided to test muting notification badges during work."
+      }
+    ],
+    insights: ["focus-depth"],
+    evidence: ["journal-4", "voice-4"]
+  },
+  {
+    id: "w20-steady-audiobooks",
+    year: 2026,
+    month: "Week 20 (May 17 - May 23)",
+    title: "Steady Progress & Audiobooks",
+    period: "May 17 - May 23, 2026",
+    summary: "Mood is very steady, running habit is going strong.",
+    milestones: [
+      {
+        date: "2026-05-20",
+        title: "Reflecting on Progress",
+        description: "Confirmed audiobook integration helps mental stability."
+      }
+    ],
+    insights: ["learning-consistency", "emotional-stability"],
+    evidence: ["voice-3", "reflection-3"]
+  },
+  {
+    id: "w18-coding-workshop",
+    year: 2026,
+    month: "Week 18 (May 10 - May 16)",
+    title: "Coding Workshop & Mentorship",
+    period: "May 10 - May 16, 2026",
+    summary: "Showed 6 coders interactive interface elements.",
+    milestones: [
+      {
+        date: "2026-05-15",
+        title: "Conducted Workshop",
+        description: "Held a 90 minute interactive coding workshop for team members."
+      }
+    ],
+    insights: ["learning-consistency", "social-energy"],
+    evidence: ["calendar-3", "voice-3"]
+  },
+  {
+    id: "w16-fitness-start",
+    year: 2026,
+    month: "Week 16 (May 1 - May 7)",
+    title: "Running Habit Start",
+    period: "May 1 - May 7, 2026",
+    summary: "Ran 4km at 6:30 AM. Felt very clear-headed and solved team issues easily today.",
+    milestones: [
+      {
+        date: "2026-05-02",
+        title: "First Run Completed",
+        description: "Woke up early and did a 4km run. Clear improvements in morning focus."
+      }
+    ],
+    insights: ["emotional-stability"],
+    evidence: ["journal-3"]
+  },
+  {
+    id: "w15-retro-alignment",
+    year: 2026,
+    month: "Week 15 (April 12 - April 18)",
+    title: "Post-Launch Retrospective",
+    period: "Apr 12 - Apr 18, 2026",
+    summary: "Talked about the new release and sorted out arguments on the team.",
+    milestones: [
+      {
+        date: "2026-04-10",
+        title: "Project Retrospective Sync",
+        description: "Aligned the team on workflow improvements following the release."
+      }
+    ],
+    insights: ["social-energy", "emotional-stability"],
+    evidence: ["calendar-2", "reflection-2"]
+  },
+  {
+    id: "w14-core-rollout",
+    year: 2026,
+    month: "Week 14 (April 5 - April 11)",
+    title: "Core Platform Rollout",
+    period: "Apr 5 - Apr 11, 2026",
+    summary: "Successfully shipped the update on a tight schedule.",
+    milestones: [
+      {
+        date: "2026-04-10",
+        title: "Core Update Shipped",
+        description: "Deployed the core update with zero user downtime."
+      }
+    ],
+    insights: ["decision-confidence"],
+    evidence: ["calendar-2"]
+  },
+  {
+    id: "w13-late-nights",
+    year: 2026,
+    month: "Week 13 (March 29 - April 4)",
+    title: "Late Night Coding Stress",
+    period: "Mar 29 - Apr 4, 2026",
+    summary: "Worked until 2 AM fixing code. Felt tired and annoyed in the morning meeting.",
+    milestones: [
+      {
+        date: "2026-04-02",
+        title: "Late Night Bug Fix",
+        description: "Fixed critical layout issue at 2 AM. Realized need for sleep boundary."
+      }
+    ],
+    insights: ["decision-confidence", "emotional-stability"],
+    evidence: ["journal-2", "voice-2"]
+  },
+  {
+    id: "w12-roadmap-sync",
+    year: 2026,
+    month: "Week 12 (March 15 - March 21)",
+    title: "Roadmap Sync & Database Choices",
+    period: "Mar 15 - Mar 21, 2026",
+    summary: "Team meeting to plan upcoming features. Sorted out database choices in 20 minutes.",
+    milestones: [
+      {
+        date: "2026-03-18",
+        title: "Database Selection",
+        description: "Aligned engineering team on relational db schema changes."
+      }
+    ],
+    insights: ["decision-confidence", "social-energy"],
+    evidence: ["calendar-1", "voice-1"]
+  },
+  {
+    id: "w11-team-align",
+    year: 2026,
+    month: "Week 11 (March 8 - March 14)",
+    title: "Team Alignment Sync",
+    period: "Mar 8 - Mar 14, 2026",
+    summary: "Finished the team sync. Discussed speed estimates and trust boundaries.",
+    milestones: [
+      {
+        date: "2026-03-12",
+        title: "Team Sync Complete",
+        description: "Aligned on team-level delivery goals."
+      }
+    ],
+    insights: ["social-energy", "decision-confidence"],
+    evidence: ["voice-1"]
+  },
+  {
+    id: "w10-lead-role",
+    year: 2026,
+    month: "Week 10 (March 1 - March 7)",
+    title: "Lead Role Transition",
+    period: "Mar 1 - Mar 7, 2026",
+    summary: "First week leading the design team. Kept mornings free, stayed calm, and planned goals.",
+    milestones: [
+      {
+        date: "2026-03-05",
+        title: "Design Leadership Kickoff",
+        description: "Took over design operations and team management."
+      }
+    ],
+    insights: ["decision-confidence"],
+    evidence: ["journal-1", "reflection-1"]
+  }
+];
+
+export const mockQuarterlyTimelineChapters = [
+  {
+    id: "q2-2026",
+    year: 2026,
+    month: "Q2 (April - June)",
+    title: "Execution, Wellness & Flow",
+    period: "Q2 2026",
+    summary: "Shifted focus to running, physical health, and Focus Wednesdays to reclaim deep work. Successfully launched core platform and established a stable routine.",
+    milestones: [
+      {
+        date: "2026-04-10",
+        title: "Core Platform Rollout",
+        description: "Successfully shipped the update on a tight schedule."
+      },
+      {
+        date: "2026-05-18",
+        title: "Running Habit & 50km Completed",
+        description: "Established morning running routine, improving mood and stability."
+      },
+      {
+        date: "2026-06-01",
+        title: "Focus Wednesdays Initiated",
+        description: "Created meeting-free days for continuous development."
+      }
+    ],
+    insights: ["focus-depth", "emotional-stability", "learning-consistency", "social-energy"],
+    evidence: ["journal-3", "voice-3", "journal-4", "voice-4", "reflection-4"]
+  },
+  {
+    id: "q1-2026",
+    year: 2026,
+    month: "Q1 (January - March)",
+    title: "Leadership Transition & Planning",
+    period: "Q1 2026",
+    summary: "Took charge of the team roadmap. Learned to balance meetings with focus blocks by keeping mornings free.",
+    milestones: [
+      {
+        date: "2026-03-01",
+        title: "Started Tech Lead Role",
+        description: "Began managing the team and planning feature rollouts."
+      },
+      {
+        date: "2026-03-12",
+        title: "Roadmap Approved",
+        description: "Got the team to agree on a safer launch schedule."
+      }
+    ],
+    insights: ["decision-confidence", "social-energy"],
+    evidence: ["journal-1", "voice-1", "calendar-1", "reflection-1"]
+  }
+];
+
+export const mockDailyInsights = {
+  "today": {
+    date: "Tuesday, June 9, 2026",
+    greeting: "Good evening, Revanshu.",
+    insight: "Tomorrow is your Focus Wednesday—a blank canvas for pure creation. 🎨 Your focus depth is shining bright at 85%! Since today's syncs drained your social energy down to 65%, let's guard your morning by keeping Slack closed. Sleep well tonight; working past midnight is a known thief of your decision confidence."
+  },
+  "yesterday": {
+    date: "Monday, June 8, 2026",
+    greeting: "Hello, Revanshu.",
+    insight: "Your weekly story has compiled. 📖 Your learning consistency is a solid 82%, powered by audiobook-rich morning runs. Remember, your emotional stability thrives on rest. Getting over 7 hours of sleep keeps stress out of your journals. Let's wind down early tonight and catch some dreams!"
+  },
+  "last-wednesday": {
+    date: "Wednesday, June 3, 2026",
+    greeting: "Good evening, Revanshu.",
+    insight: "What a masterclass in deep work! 🚀 You locked in 4.8 hours of uninterrupted coding flow today. By silencing Slack, you kept stress low and sent your focus depth soaring to 85%. Focus Wednesdays are your superpower—keep them sacred!"
+  }
+};
+
 export const getEvidenceById = (id) => mockEvidence.find(e => e.id === id);
 export const getMetricById = (id) => mockMetrics.find(m => m.id === id);
 export const getChapterById = (id) => mockTimelineChapters.find(c => c.id === id);
+
