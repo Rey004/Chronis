@@ -1,65 +1,73 @@
-import Image from "next/image";
+'use client';
+import React from 'react';
+import { mockMetrics } from '@/data/mockData';
+import MetricCard from '@/components/dashboard/MetricCard';
+import BehaviorChart from '@/components/dashboard/BehaviorChart';
+import ContributionsChart from '@/components/dashboard/ContributionsChart';
+import RecentObservations from '@/components/dashboard/RecentObservations';
+import { Brain, Sparkles } from 'lucide-react';
 
-export default function Home() {
+export default function Dashboard() {
+  const metrics = mockMetrics;
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.js file.
+    <div className="flex flex-col gap-8 md:gap-12 animate-in fade-in slide-in-from-bottom-6 duration-700">
+      
+      {/* Premium Welcome Header */}
+      <section className="border-b border-[rgba(255,255,255,0.05)] pb-8 mb-2">
+        <div>
+          <div className="flex items-center gap-2 text-[10px] font-mono tracking-[0.3em] text-[#a78bfa] uppercase mb-3">
+            <Brain size={12} className="animate-pulse" />
+            <span>Overview</span>
+          </div>
+          <h1 className="font-serif text-3xl md:text-5xl font-light leading-[1.15] text-[#ece8e2]">
+            Welcome, <span className="text-[rgba(236,232,226,0.62)] italic font-light">Revanshu</span>
           </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+          <p className="text-sm md:text-[15px] font-light text-brand-muted-light mt-3 max-w-2xl leading-relaxed">
+            Chronis collects notes and meetings from your memory locket to show your daily habits and progress.
           </p>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+      </section>
+
+      {/* Behavioral Trend Cards Grid */}
+      <section className="flex flex-col gap-4">
+        <div className="flex items-center justify-between">
+          <h2 className="font-serif text-lg tracking-wider text-brand-text font-light flex items-center gap-2">
+            <Sparkles size={14} className="text-brand-violet" />
+            <span>Your Habits</span>
+          </h2>
+          <span className="text-[10px] font-mono text-brand-muted tracking-wider uppercase">
+            Click a score to see details
+          </span>
         </div>
-      </main>
+        
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+          {metrics.map((metric) => (
+            <div key={metric.id} className="h-full">
+              <MetricCard metric={metric} />
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Graphical Insights & Logs Breakdown */}
+      <section className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        {/* Left Column: 6-Week Timeseries Trend Chart */}
+        <div className="lg:col-span-2">
+          <BehaviorChart metrics={metrics} />
+        </div>
+
+        {/* Right Column: Mini Data Contributions Analysis */}
+        <div className="lg:col-span-1">
+          <ContributionsChart />
+        </div>
+      </section>
+
+      {/* Recent Syntheses and Timeline Bulletins */}
+      <section className="grid grid-cols-1 gap-6">
+        <RecentObservations />
+      </section>
+      
     </div>
   );
 }
