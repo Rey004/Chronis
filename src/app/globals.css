@@ -115,3 +115,23 @@ body {
   font-family: 'Plus Jakarta Sans', system-ui, sans-serif !important;
   font-size: 10px !important;
 }
+
+/* Eliminate Recharts focus outlines on SVG, wrapper, tooltip, cursor, and interactive elements */
+.recharts-wrapper,
+.recharts-wrapper *,
+.recharts-surface,
+.recharts-surface *,
+.recharts-tooltip-wrapper,
+.recharts-tooltip-wrapper * {
+  outline: none !important;
+  box-shadow: none !important;
+  border-color: transparent !important;
+}
+
+.recharts-wrapper *:focus,
+.recharts-wrapper *:focus-visible,
+.recharts-wrapper *:active {
+  outline: none !important;
+  box-shadow: none !important;
+  border: none !important;
+}

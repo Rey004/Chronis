@@ -2,7 +2,7 @@
 // Opt out of React Compiler optimization to prevent element type and key conflicts in Recharts
 "use no memo";
 import React, { useState, useEffect } from 'react';
-import { ResponsiveContainer, LineChart, Line, XAxis, YAxis, Tooltip, CartesianGrid } from 'recharts';
+import { ResponsiveContainer, LineChart, Line, XAxis, YAxis, Tooltip, CartesianGrid, ReferenceLine } from 'recharts';
 import { Eye, EyeOff } from 'lucide-react';
 
 const METRIC_STYLES = {
@@ -16,15 +16,18 @@ const METRIC_STYLES = {
 // Custom Tooltip component defined OUTSIDE the parent render to prevent recreation flicker
 const CustomTooltip = ({ active, payload, label }) => {
   if (active && payload && payload.length) {
+    // Sort payload by value descending so the highest scores are at the top
+    const sortedPayload = [...payload].sort((a, b) => b.value - a.value);
     return (
-      <div className="bg-[rgba(11,11,11,0.92)] border border-[rgba(255,255,255,0.08)] rounded-xl p-4 shadow-xl backdrop-blur-md">
+      <div className="bg-[rgba(11,11,11,0.92)] border border-[rgba(255,255,255,0.08)] rounded-xl p-4 shadow-xl backdrop-blur-md min-w-[210px]">
         <p className="text-xs font-mono text-brand-muted uppercase tracking-wider mb-2.5">{label}</p>
         <div className="flex flex-col gap-2">
-          {payload.map((entry) => {
+          {sortedPayload.map((entry) => {
             const metricKey = entry.dataKey || entry.name;
             const style = METRIC_STYLES[metricKey] || { color: '#a78bfa', name: metricKey };
             const displayName = style.name;
             const strokeColor = entry.stroke || style.color;
+            const isOptimal = entry.value >= 75;
             return (
               <div key={metricKey} className="flex items-center justify-between gap-6">
                 <div className="flex items-center gap-2">
@@ -34,7 +37,16 @@ const CustomTooltip = ({ active, payload, label }) => {
                   />
                   <span className="text-xs text-brand-muted-light">{displayName}</span>
                 </div>
-                <span className="text-xs font-semibold text-[#ece8e2]">{entry.value}%</span>
+                <div className="flex items-center gap-2">
+                  <span className="text-xs font-semibold text-[#ece8e2]">{entry.value}%</span>
+                  <span className={`text-[8px] font-mono px-1 py-0.5 rounded uppercase tracking-wider ${
+                    isOptimal 
+                      ? 'text-emerald-400 bg-emerald-500/10' 
+                      : 'text-amber-400 bg-amber-500/10'
+                  }`}>
+                    {isOptimal ? 'Opt' : 'Neu'}
+                  </span>
+                </div>
               </div>
             );
           })}
@@ -106,6 +118,9 @@ export default function BehaviorChart({ metrics = [] }) {
           <h3 className="font-serif text-xl font-light text-brand-text mt-0.5">
             Your Scores Over Time
           </h3>
+          <p className="text-[11px] text-brand-muted font-light mt-1.5 max-w-sm leading-relaxed">
+            Hover to inspect scores. Click the pill toggles to isolate or overlay specific habits.
+          </p>
         </div>
         
         {/* Metric selection pills */}
@@ -119,7 +134,7 @@ export default function BehaviorChart({ metrics = [] }) {
               <button
                 key={m.id}
                 onClick={() => toggleMetric(m.id)}
-                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[11px] border transition-all duration-300 ${
+                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[11px] border transition-all duration-300 outline-none focus:outline-none ${
                   isActive 
                     ? 'text-brand-text bg-white/5' 
                     : 'text-brand-muted border-transparent hover:text-brand-muted-light'
@@ -147,8 +162,12 @@ export default function BehaviorChart({ metrics = [] }) {
 
       {/* Chart Canvas */}
       <div className="h-[280px] w-full pr-2">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={chartData} margin={{ top: 10, right: 10, left: -25, bottom: 0 }}>
+        <ResponsiveContainer width="100%" height="100%" style={{ outline: 'none' }}>
+          <LineChart 
+            data={chartData} 
+            margin={{ top: 10, right: 10, left: -25, bottom: 0 }}
+            style={{ outline: 'none' }}
+          >
             <CartesianGrid strokeDasharray="3 3" vertical={false} />
             <XAxis 
               dataKey="name" 
@@ -163,6 +182,19 @@ export default function BehaviorChart({ metrics = [] }) {
               tickMargin={12}
             />
             <Tooltip content={<CustomTooltip />} cursor={{ stroke: 'rgba(255, 255, 255, 0.05)', strokeWidth: 1 }} />
+            <ReferenceLine 
+              y={75} 
+              stroke="rgba(255, 255, 255, 0.08)" 
+              strokeDasharray="4 4" 
+              label={{ 
+                value: 'Optimal Threshold (75%)', 
+                fill: 'rgba(236, 232, 226, 0.25)', 
+                fontSize: 8, 
+                position: 'top',
+                fontFamily: 'monospace',
+                letterSpacing: '0.05em'
+              }} 
+            />
             
             {/* Explicitly pre-filter active lines to avoid Recharts null iteration errors */}
             {metrics

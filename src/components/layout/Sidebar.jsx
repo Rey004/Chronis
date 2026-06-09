@@ -128,7 +128,7 @@ export default function Sidebar({ isCollapsed, setIsCollapsed }) {
                 />
                 
                 <span 
-                  className={`font-sans text-xs tracking-wider font-medium uppercase whitespace-nowrap transition-all duration-200 ${
+                  className={`font-sans text-[10px] tracking-widest font-medium uppercase whitespace-nowrap transition-all duration-200 ${
                     isCollapsed ? 'w-0 opacity-0 overflow-hidden pointer-events-none' : 'w-auto opacity-100'
                   }`}
                 >
