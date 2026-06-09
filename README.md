@@ -1,36 +1,118 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# <img src="./src/app/icon.svg" width="32" height="32" align="center" /> Chronis — The Memory Locket & Cognitive Mirror
 
-## Getting Started
+> *"Time is a quiet loom, and Chronis is the thread that binds your choices into a constellation of habits."*
 
-First, run the development server:
+🔗 **Live Demo**: [use-chronis.vercel.app](https://use-chronis.vercel.app)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+**Chronis** is an elegant, editorial self-reflection dashboard and cognitive workspace. Inspired by the quiet depth of a starry night sky and the timeless beauty of classical typography, Chronis aggregates your self-logged diaries, voice memos, calendar meetings, and weekly reviews to synthesize a high-fidelity mirror of your habits, energy, and decision-making flow.
+
+Designed with **glassmorphism**, dynamic **micro-animations**, and a twinkling **starfield background**, Chronis turns personal data metrics into a serene, meditative experience.
+
+---
+
+## 🎨 Theme & Design Aesthetics
+
+Chronis is built on an editorial, dark-mode design system:
+- **Cosmic Ambiance**: Twinkling background canvas (`Starfield`) using warm, starlit text colors (`#ece8e2`) drifting across a deep space-black canvas (`#050505`).
+- **Classic Typography**: Serene serif accents (using `Cormorant Garamond` & Georgia) paired with clean, modern sans-serif lines (`Plus Jakarta Sans`).
+- **Stardust Glassmorphism**: Cards and navigation floating in semi-translucent glass panels (`backdrop-blur`) bordered by faint stellar dust glows (`#a78bfa` / `#7c3aed`).
+- **Private & Encrypted**: A status readout reflecting client-side encryption and local syncing ("Locket Synced").
+
+---
+
+## 📸 Walkthrough & Screen Tour
+
+Here is a walkthrough of the core Chronis interface.
+
+### 1. The Dashboard (Overview)
+Your cockpit of self-alignment. Features a custom welcome greeting for the user (**Revanshu**), an AI-powered conversational synthesis dialogue, and an overview of your primary metrics.
+
+```
++-------------------------------------------------------+
+|  [IMAGE PLACEHOLDER: Chronis Dashboard Overview]     |
+|  (e.g., dashboard-screenshot.png)                     |
++-------------------------------------------------------+
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+*   **Metric Cards**: Tracks 5 key behavioral scores:
+    *   **Decision Confidence**: Driven by morning logs and calendar speed.
+    *   **Social Energy**: Monitors battery drain from consecutive meetings.
+    *   **Learning Consistency**: Integrates audiobook logs with physical runs.
+    *   **Emotional Stability**: Cross-references sleep time with journal sentiments.
+    *   **Focus Depth & Flow**: Measures quiet blocks of deep work.
+*   **Behavioral Trend Charts**: A Recharts-powered 6-week timeseries graph visualizing how your focus, stability, and energy correlate.
+*   **Contributions Breakdown**: An activity grid mapping your reflection inputs over time.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 2. Insight Explorer (Evidence Check)
+Ever wonder why your focus score dropped or why your decision confidence spiked? The **Insight Explorer** is a portal that displays the underlying facts, reasoning, and raw diary archives behind every metric.
 
-## Learn More
+```
++-------------------------------------------------------+
+|  [IMAGE PLACEHOLDER: Chronis Insight Explorer]       |
+|  (e.g., insights-screenshot.png)                      |
++-------------------------------------------------------+
+```
 
-To learn more about Next.js, take a look at the following resources:
+*   **Evidence Logs**: Read transcripts of voice memos (e.g., noting vocal stability scores) or review private journal entries (e.g., reflections on midnight coding or early morning runs).
+*   **Reasoning Statements**: Structured analysis explaining exactly how the AI reached its rating (e.g., *"Running days show a 15% drop in stress keywords"*).
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### 3. Life Chapters (Timeline)
+Chronis translates days and weeks into a readable biography. The **Timeline** groups milestones, reflections, and insights into chronological chapters.
 
-## Deploy on Vercel
+```
++-------------------------------------------------------+
+|  [IMAGE PLACEHOLDER: Chronis Life Chapters Timeline]  |
+|  (e.g., timeline-screenshot.png)                      |
++-------------------------------------------------------+
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+*   **Granular Filters**: View your life progression by **Weekly**, **Monthly**, or **Quarterly** segments.
+*   **Milestone Anchors**: Look back at pivotal moments (e.g., transitioning to Tech Lead, launching a product, starting a fitness habit) mapped alongside the behavioral metrics that shaped them.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+
+## 🛠️ Tech Stack & Architecture
+
+Chronis is engineered with a modern, high-performance web stack:
+- **Framework**: [Next.js 16](https://nextjs.org/) (utilizing the App Router structure for efficient file-based routing and Server Components).
+- **Styling**: [Tailwind CSS v4](https://tailwindcss.com/) with native `@theme` directives for custom variables, glassmorphic filters, and float animations.
+- **Visuals**: [Recharts](https://recharts.org/) for highly customized responsive charts, styled dynamically to disable focus outlines and match the dark glass aesthetic.
+- **Icons**: [Lucide React](https://lucide.dev/) for crisp, uniform iconography.
+- **Performance**: Integrated support for the new React Compiler (`babel-plugin-react-compiler`) to automatically optimize render cycles.
+
+---
+
+## 🚀 Local Run Instructions
+
+To run Chronis locally on your machine, follow these steps:
+
+### Prerequisites
+Make sure you have [Node.js](https://nodejs.org/) (v18.0.0 or higher recommended) and `npm` installed.
+
+### 1. Clone & Navigate
+Navigate to your project directory:
+```bash
+cd chronis
+```
+
+### 2. Install Dependencies
+Install the required packages:
+```bash
+npm install
+```
+
+### 3. Run the Development Server
+Launch the local Next.js dev server:
+```bash
+npm run dev
+```
+
+### 4. Open in Browser
+Open your browser and navigate to:
+**[http://localhost:3000](http://localhost:3000)**
+
+The page will auto-update as you edit files in `src/`.

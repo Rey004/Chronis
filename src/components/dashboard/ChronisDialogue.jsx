@@ -80,7 +80,7 @@ export default function ChronisDialogue() {
   };
 
   return (
-    <div className="w-full bg-gradient-to-b from-[rgba(20,20,20,0.4)] to-[rgba(5,5,5,0.2)] border border-brand-border rounded-[28px] p-6 md:p-7 glass-panel relative overflow-hidden shadow-[0_8px_32px_rgba(0,0,0,0.2)]">
+    <div className="w-full bg-gradient-to-b from-[rgba(20,20,20,0.4)] to-[rgba(5,5,5,0.2)] border border-brand-border rounded-[22px] sm:rounded-[28px] p-4 sm:p-6 md:p-7 glass-panel relative overflow-hidden shadow-[0_8px_32px_rgba(0,0,0,0.2)]">
       
       {/* CSS Keyframes for voice waveform scaling */}
       <style dangerouslySetInnerHTML={{__html: `
@@ -137,10 +137,10 @@ export default function ChronisDialogue() {
         </div>
 
         {/* Action Controls: Waveform & Selector */}
-        <div className="flex items-center gap-4 self-end sm:self-center">
+        <div className="flex flex-wrap items-center gap-3 sm:gap-4 w-full sm:w-auto justify-between sm:justify-end sm:self-center">
           
           {/* Animated Glowing Voice Waveform */}
-          <div className="flex items-center gap-1 h-5 px-3 py-1.5 rounded-full bg-white/[0.02] border border-[rgba(255,255,255,0.04)] shadow-inner">
+          <div className="flex-shrink-0 flex items-center gap-1 h-5 px-3 py-1.5 rounded-full bg-white/[0.02] border border-[rgba(255,255,255,0.04)] shadow-inner">
             <span className="text-[8px] font-mono text-brand-muted uppercase tracking-widest mr-1.5">vocal wave</span>
             <div className="flex items-center gap-0.75 w-10 justify-between">
               {[
@@ -166,7 +166,7 @@ export default function ChronisDialogue() {
           </div>
 
           {/* Custom styled select */}
-          <div className="relative">
+          <div className="relative flex-shrink-0">
             <select
               value={selectedDay}
               onChange={(e) => setSelectedDay(e.target.value)}
@@ -192,7 +192,7 @@ export default function ChronisDialogue() {
         </div>
         
         {/* Text Container with speech design */}
-        <div className="flex-grow flex flex-col gap-3.5 bg-gradient-to-r from-[rgba(255,255,255,0.015)] to-transparent border-l-2 border-l-brand-purple/40 pl-4 py-1.5 pr-2">
+        <div className="flex-grow min-w-0 flex flex-col gap-3.5 bg-gradient-to-r from-[rgba(255,255,255,0.015)] to-transparent border-l-2 border-l-brand-purple/40 pl-4 py-1.5 pr-2">
           
           <div className="flex items-center gap-1.5">
             <span className="text-xs font-mono text-[#a78bfa] font-bold tracking-widest uppercase">
@@ -201,7 +201,7 @@ export default function ChronisDialogue() {
             <Star size={10} className="text-brand-violet animate-pulse fill-brand-violet/20" />
           </div>
           
-          <div className="font-serif text-lg md:text-xl font-light leading-relaxed text-[#ece8e2]/95 min-h-[85px] tracking-wide">
+          <div className="font-serif text-base sm:text-lg md:text-xl font-light leading-relaxed text-[#ece8e2]/95 min-h-[85px] tracking-wide">
             {formatInsightText(displayedText)}
             {isTyping && (
               <span className="inline-block w-2 h-4.5 ml-1.5 bg-gradient-to-b from-brand-violet to-brand-purple animate-pulse rounded-full align-middle shadow-[0_0_8px_rgba(167,139,250,0.5)]" />
