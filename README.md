@@ -27,12 +27,8 @@ Here is a walkthrough of the core Chronis interface.
 ### 1. The Dashboard (Overview)
 Your cockpit of self-alignment. Features a custom welcome greeting for the user (**Revanshu**), an AI-powered conversational synthesis dialogue, and an overview of your primary metrics.
 
-```
-+-------------------------------------------------------+
-|  [IMAGE PLACEHOLDER: Chronis Dashboard Overview]     |
-|  (e.g., dashboard-screenshot.png)                     |
-+-------------------------------------------------------+
-```
+![Chronis Dashboard Overview](/public/dashboard1.png)
+![Chronis Dashboard Alternate](/public/dashboard2.png)
 
 *   **Metric Cards**: Tracks 5 key behavioral scores:
     *   **Decision Confidence**: Driven by morning logs and calendar speed.
@@ -48,12 +44,8 @@ Your cockpit of self-alignment. Features a custom welcome greeting for the user 
 ### 2. Insight Explorer (Evidence Check)
 Ever wonder why your focus score dropped or why your decision confidence spiked? The **Insight Explorer** is a portal that displays the underlying facts, reasoning, and raw diary archives behind every metric.
 
-```
-+-------------------------------------------------------+
-|  [IMAGE PLACEHOLDER: Chronis Insight Explorer]       |
-|  (e.g., insights-screenshot.png)                      |
-+-------------------------------------------------------+
-```
+![Chronis Insight Explorer](/public/insight1.png)
+![Chronis Insight Explorer Detail](/public/insight2.png)
 
 *   **Evidence Logs**: Read transcripts of voice memos (e.g., noting vocal stability scores) or review private journal entries (e.g., reflections on midnight coding or early morning runs).
 *   **Reasoning Statements**: Structured analysis explaining exactly how the AI reached its rating (e.g., *"Running days show a 15% drop in stress keywords"*).
@@ -63,15 +55,18 @@ Ever wonder why your focus score dropped or why your decision confidence spiked?
 ### 3. Life Chapters (Timeline)
 Chronis translates days and weeks into a readable biography. The **Timeline** groups milestones, reflections, and insights into chronological chapters.
 
-```
-+-------------------------------------------------------+
-|  [IMAGE PLACEHOLDER: Chronis Life Chapters Timeline]  |
-|  (e.g., timeline-screenshot.png)                      |
-+-------------------------------------------------------+
-```
+![Chronis Life Chapters Timeline](/public/timeline1.png)
+![Chronis Timeline Detail](/public/timeline2.png)
 
 *   **Granular Filters**: View your life progression by **Weekly**, **Monthly**, or **Quarterly** segments.
 *   **Milestone Anchors**: Look back at pivotal moments (e.g., transitioning to Tech Lead, launching a product, starting a fitness habit) mapped alongside the behavioral metrics that shaped them.
+
+---
+
+### 4. Mobile Navigation
+Seamlessly access Chronis on the go. The mobile interface maintains the same serene aesthetic and core functionality while optimizing for smaller screens.
+
+![Chronis Mobile Navigation](/public/mobile-navigation.png)
 
 ---
 
